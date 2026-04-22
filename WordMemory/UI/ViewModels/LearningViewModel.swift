@@ -283,3 +283,22 @@ class LearningViewModel: ObservableObject {
         }
     }
 }
+
+// MARK: - Supporting Types
+
+enum LearningMode {
+    case recognition
+    case spelling
+}
+
+enum AlgorithmVersion {
+    case v3
+    case v4
+}
+
+enum SpellingOutcome {
+    case perfect      // 完全正确
+    case correct      // 正确（有小错误）
+    case close        // 接近（1-2个字母错误）
+    case wrong        // 错误
+}
