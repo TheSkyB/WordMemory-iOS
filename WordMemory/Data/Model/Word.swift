@@ -56,22 +56,3 @@ enum StudyRating: Int, Codable, CaseIterable {
         }
     }
 }
-
-enum SpellingOutcome: Int, Codable {
-    case failed = 1
-    case retrySuccess = 3
-    case hinted = 4
-    case perfect = 5
-    
-    var quality: Int { rawValue }
-}
-
-enum LearningMode {
-    case recognition
-    case spelling
-}
-
-enum AlgorithmVersion {
-    case v3
-    case v4
-}
