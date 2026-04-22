@@ -15,15 +15,14 @@ class AIService {
     
     static let shared = AIService()
     
-    private let apiKey: String
+    private var apiKey: String {
+        UserDefaults.standard.string(forKey: "ai_api_key") ?? ""
+    }
     private let baseURL = "https://api.deepseek.com/v1/chat/completions"
     
-    private init() {
-        // Load API key from UserDefaults or use placeholder
-        self.apiKey = UserDefaults.standard.string(forKey: "ai_api_key") ?? ""
-    }
+    private init() {}
     
-    func setAPIKey(_ key: String) {
+    static func setAPIKey(_ key: String) {
         UserDefaults.standard.set(key, forKey: "ai_api_key")
     }
     

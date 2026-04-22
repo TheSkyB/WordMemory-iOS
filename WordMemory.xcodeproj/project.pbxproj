@@ -1,0 +1,362 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0B51621E8B99C5F352B658B5 /* AdaptiveColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8861CB43226B044E09976E43 /* AdaptiveColors.swift */; };
+		1284E4883BAED3FB6D5ECD07 /* NotebookScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AAEE226C7F02E989B3ADA6 /* NotebookScreen.swift */; };
+		2C42099C2A5606E6FD74DB06 /* SM2Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CC6A7A37DF7AA3B8A78A46 /* SM2Scheduler.swift */; };
+		310330C575D1794414DA09AE /* WordMemoryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCCC955E26182F44AE8DE48 /* WordMemoryApp.swift */; };
+		3C553C41AA37F1932D64FFBC /* AppIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 834ECBCD14B86A5665C55B25 /* AppIcon.png */; };
+		405E79F12560BA04C50E0C9C /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D80187E7A8FB7233736E50E /* DatabaseManager.swift */; };
+		4E40BAB5602194142026F4EE /* AIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAB7C7CA7DDFD184D8DF2E5 /* AIService.swift */; };
+		512AB417EA9F455DEAC5057B /* SpellingEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85BA25979B1E06BF52FF22A /* SpellingEvaluator.swift */; };
+		5BA4CF96E951D3A64700B794 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70FD15DCB3CF7B0CC4D6F92 /* NotificationManager.swift */; };
+		69C73084F87B8E257E96674F /* wordbook_full.json in Resources */ = {isa = PBXBuildFile; fileRef = 22B154AB75B1289476932AFB /* wordbook_full.json */; };
+		6CFB9E52B612036812F1B0AF /* SpellingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C093FD1CC29E5AC7E3E3D585 /* SpellingView.swift */; };
+		73B6C75B4E16533B93B423CF /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01E3C75C71AB1C6981A5D16 /* ProfileScreen.swift */; };
+		84061891E3FE919A5F6FB050 /* NotebookManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B5C9FC657C95198153E100 /* NotebookManager.swift */; };
+		94D726652ABB849442503263 /* StatsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F054B89A883C39D49C53F37 /* StatsScreen.swift */; };
+		97B10F8CD534B64B1C384026 /* SQLiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7D37535ACFD71DDA36F194 /* SQLiteManager.swift */; };
+		A6B5CC20DDF22CEE7A89F682 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AE5B39A3352E4F901AEFA5 /* Progress.swift */; };
+		B4C7A8281037838CB9A82913 /* WordbookLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BF6F042ED6761F92E30F77 /* WordbookLoader.swift */; };
+		B5ADAD93056FF99F467840B7 /* LearningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8411116F0B890B81109A2364 /* LearningViewModel.swift */; };
+		BC27F991739E04435BE7078D /* PronunciationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D7AB1E680A3E560180BAD7 /* PronunciationService.swift */; };
+		BC31CC58614534F63ED29DA2 /* ReviewPressureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3174AA4DA4D439EE96947E9F /* ReviewPressureManager.swift */; };
+		C355428B4B8E997B06C8F3BA /* LearningScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F68680AAB0115296031B7 /* LearningScreen.swift */; };
+		C921DC7D49184386EC207821 /* AIAssistantPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8735A23EBCCD9454ABE87B06 /* AIAssistantPanel.swift */; };
+		CAF1455CF599C948994FFAD9 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D1A6622D831195A7050FE3 /* Word.swift */; };
+		CCE601C8517DEDECCC462C33 /* wordbook_full_from_e2c.json in Resources */ = {isa = PBXBuildFile; fileRef = 65097A9B0866577FFC00794D /* wordbook_full_from_e2c.json */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		10B5C9FC657C95198153E100 /* NotebookManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookManager.swift; sourceTree = "<group>"; };
+		22B154AB75B1289476932AFB /* wordbook_full.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = wordbook_full.json; sourceTree = "<group>"; };
+		3174AA4DA4D439EE96947E9F /* ReviewPressureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewPressureManager.swift; sourceTree = "<group>"; };
+		31CC6A7A37DF7AA3B8A78A46 /* SM2Scheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SM2Scheduler.swift; sourceTree = "<group>"; };
+		3A7D37535ACFD71DDA36F194 /* SQLiteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteManager.swift; sourceTree = "<group>"; };
+		49D1A6622D831195A7050FE3 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
+		553F68680AAB0115296031B7 /* LearningScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningScreen.swift; sourceTree = "<group>"; };
+		65097A9B0866577FFC00794D /* wordbook_full_from_e2c.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = wordbook_full_from_e2c.json; sourceTree = "<group>"; };
+		7EAB7C7CA7DDFD184D8DF2E5 /* AIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIService.swift; sourceTree = "<group>"; };
+		834ECBCD14B86A5665C55B25 /* AppIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon.png; sourceTree = "<group>"; };
+		8411116F0B890B81109A2364 /* LearningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningViewModel.swift; sourceTree = "<group>"; };
+		8735A23EBCCD9454ABE87B06 /* AIAssistantPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIAssistantPanel.swift; sourceTree = "<group>"; };
+		87AE5B39A3352E4F901AEFA5 /* Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
+		8861CB43226B044E09976E43 /* AdaptiveColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveColors.swift; sourceTree = "<group>"; };
+		9D80187E7A8FB7233736E50E /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		9F054B89A883C39D49C53F37 /* StatsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsScreen.swift; sourceTree = "<group>"; };
+		A1BF6F042ED6761F92E30F77 /* WordbookLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordbookLoader.swift; sourceTree = "<group>"; };
+		ADCCC955E26182F44AE8DE48 /* WordMemoryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordMemoryApp.swift; sourceTree = "<group>"; };
+		B70FD15DCB3CF7B0CC4D6F92 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		B9A9EAE8A1F3A06F8107083E /* WordMemory.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = WordMemory.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C093FD1CC29E5AC7E3E3D585 /* SpellingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpellingView.swift; sourceTree = "<group>"; };
+		D01E3C75C71AB1C6981A5D16 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
+		D85BA25979B1E06BF52FF22A /* SpellingEvaluator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpellingEvaluator.swift; sourceTree = "<group>"; };
+		F0D7AB1E680A3E560180BAD7 /* PronunciationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PronunciationService.swift; sourceTree = "<group>"; };
+		F308F2EF7E8A42662D933C61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F8AAEE226C7F02E989B3ADA6 /* NotebookScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookScreen.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		01C369E06CB5F5A4CF022ECD /* SM2 */ = {
+			isa = PBXGroup;
+			children = (
+				31CC6A7A37DF7AA3B8A78A46 /* SM2Scheduler.swift */,
+			);
+			path = SM2;
+			sourceTree = "<group>";
+		};
+		05BE414334CD6EA308E81B9B /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				553F68680AAB0115296031B7 /* LearningScreen.swift */,
+				F8AAEE226C7F02E989B3ADA6 /* NotebookScreen.swift */,
+				D01E3C75C71AB1C6981A5D16 /* ProfileScreen.swift */,
+				C093FD1CC29E5AC7E3E3D585 /* SpellingView.swift */,
+				9F054B89A883C39D49C53F37 /* StatsScreen.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		2512B25A15CAA2CB9941A6EA /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				8411116F0B890B81109A2364 /* LearningViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		36C3452109811F4265D1D557 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				451680B080EDC697CC764557 /* Components */,
+				05BE414334CD6EA308E81B9B /* Screens */,
+				2512B25A15CAA2CB9941A6EA /* ViewModels */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		43957D323B603A7B74F9DC89 /* WordMemory */ = {
+			isa = PBXGroup;
+			children = (
+				F308F2EF7E8A42662D933C61 /* Info.plist */,
+				ADCCC955E26182F44AE8DE48 /* WordMemoryApp.swift */,
+				FBF6FD6641060DBC3351946D /* Core */,
+				D8C1F50C578B866C7F808E43 /* Data */,
+				F557C48F4E20FCEAB983BB52 /* Resources */,
+				36C3452109811F4265D1D557 /* UI */,
+			);
+			path = WordMemory;
+			sourceTree = "<group>";
+		};
+		451680B080EDC697CC764557 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				8861CB43226B044E09976E43 /* AdaptiveColors.swift */,
+				8735A23EBCCD9454ABE87B06 /* AIAssistantPanel.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		7F59237A959A4E6C1530B783 = {
+			isa = PBXGroup;
+			children = (
+				43957D323B603A7B74F9DC89 /* WordMemory */,
+				E19499688DFCD109B196C304 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A4DDEF5FA74F5E417F928765 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				87AE5B39A3352E4F901AEFA5 /* Progress.swift */,
+				49D1A6622D831195A7050FE3 /* Word.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D8C1F50C578B866C7F808E43 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				9D80187E7A8FB7233736E50E /* DatabaseManager.swift */,
+				3A7D37535ACFD71DDA36F194 /* SQLiteManager.swift */,
+				A4DDEF5FA74F5E417F928765 /* Model */,
+				E1EF69B58DC14A0EFE862958 /* Repository */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		E19499688DFCD109B196C304 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B9A9EAE8A1F3A06F8107083E /* WordMemory.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E1EF69B58DC14A0EFE862958 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				10B5C9FC657C95198153E100 /* NotebookManager.swift */,
+				A1BF6F042ED6761F92E30F77 /* WordbookLoader.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		F5229DB20148805EA3D2DE9F /* AI */ = {
+			isa = PBXGroup;
+			children = (
+				7EAB7C7CA7DDFD184D8DF2E5 /* AIService.swift */,
+			);
+			path = AI;
+			sourceTree = "<group>";
+		};
+		F557C48F4E20FCEAB983BB52 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				834ECBCD14B86A5665C55B25 /* AppIcon.png */,
+				65097A9B0866577FFC00794D /* wordbook_full_from_e2c.json */,
+				22B154AB75B1289476932AFB /* wordbook_full.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		FBF6FD6641060DBC3351946D /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				B70FD15DCB3CF7B0CC4D6F92 /* NotificationManager.swift */,
+				F0D7AB1E680A3E560180BAD7 /* PronunciationService.swift */,
+				3174AA4DA4D439EE96947E9F /* ReviewPressureManager.swift */,
+				D85BA25979B1E06BF52FF22A /* SpellingEvaluator.swift */,
+				F5229DB20148805EA3D2DE9F /* AI */,
+				01C369E06CB5F5A4CF022ECD /* SM2 */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8A747D6C7BC36CB2A4040155 /* WordMemory */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 829386D03D08E4C004123105 /* Build configuration list for PBXNativeTarget "WordMemory" */;
+			buildPhases = (
+				2C68C0CBE0E46ED1F41B5EDA /* Sources */,
+				4FE0C6C6868BC6F9544BF444 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WordMemory;
+			productName = WordMemory;
+			productReference = B9A9EAE8A1F3A06F8107083E /* WordMemory.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2864E6E51FC5783FA1CEF68E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 20F5876C42DA5E08C564D97F /* Build configuration list for PBXProject "WordMemory" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 7F59237A959A4E6C1530B783;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8A747D6C7BC36CB2A4040155 /* WordMemory */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4FE0C6C6868BC6F9544BF444 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C553C41AA37F1932D64FFBC /* AppIcon.png in Resources */,
+				69C73084F87B8E257E96674F /* wordbook_full.json in Resources */,
+				CCE601C8517DEDECCC462C33 /* wordbook_full_from_e2c.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2C68C0CBE0E46ED1F41B5EDA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C921DC7D49184386EC207821 /* AIAssistantPanel.swift in Sources */,
+				4E40BAB5602194142026F4EE /* AIService.swift in Sources */,
+				0B51621E8B99C5F352B658B5 /* AdaptiveColors.swift in Sources */,
+				405E79F12560BA04C50E0C9C /* DatabaseManager.swift in Sources */,
+				C355428B4B8E997B06C8F3BA /* LearningScreen.swift in Sources */,
+				B5ADAD93056FF99F467840B7 /* LearningViewModel.swift in Sources */,
+				84061891E3FE919A5F6FB050 /* NotebookManager.swift in Sources */,
+				1284E4883BAED3FB6D5ECD07 /* NotebookScreen.swift in Sources */,
+				5BA4CF96E951D3A64700B794 /* NotificationManager.swift in Sources */,
+				73B6C75B4E16533B93B423CF /* ProfileScreen.swift in Sources */,
+				A6B5CC20DDF22CEE7A89F682 /* Progress.swift in Sources */,
+				BC27F991739E04435BE7078D /* PronunciationService.swift in Sources */,
+				BC31CC58614534F63ED29DA2 /* ReviewPressureManager.swift in Sources */,
+				2C42099C2A5606E6FD74DB06 /* SM2Scheduler.swift in Sources */,
+				97B10F8CD534B64B1C384026 /* SQLiteManager.swift in Sources */,
+				512AB417EA9F455DEAC5057B /* SpellingEvaluator.swift in Sources */,
+				6CFB9E52B612036812F1B0AF /* SpellingView.swift in Sources */,
+				94D726652ABB849442503263 /* StatsScreen.swift in Sources */,
+				CAF1455CF599C948994FFAD9 /* Word.swift in Sources */,
+				310330C575D1794414DA09AE /* WordMemoryApp.swift in Sources */,
+				B4C7A8281037838CB9A82913 /* WordbookLoader.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		44B76C0D43DAE3C2AA3AB259 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = WordMemory/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wordmemory.app;
+				PRODUCT_NAME = WordMemory;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		71D9F1825396922FB2527B6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		73B7CA32A519C1E49E93CDC8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = WordMemory/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wordmemory.app;
+				PRODUCT_NAME = WordMemory;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A426FBB9A9637A9F55FE7F84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		20F5876C42DA5E08C564D97F /* Build configuration list for PBXProject "WordMemory" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A426FBB9A9637A9F55FE7F84 /* Debug */,
+				71D9F1825396922FB2527B6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		829386D03D08E4C004123105 /* Build configuration list for PBXNativeTarget "WordMemory" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				44B76C0D43DAE3C2AA3AB259 /* Debug */,
+				73B7CA32A519C1E49E93CDC8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2864E6E51FC5783FA1CEF68E /* Project object */;
+}

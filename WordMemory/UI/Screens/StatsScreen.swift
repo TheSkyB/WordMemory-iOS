@@ -12,13 +12,22 @@ struct StatsScreen: View {
         NavigationView {
             List {
                 Section("今日统计") {
-                    HStack {
-                        Image(systemName: "book.fill")
-                            .foregroundColor(.blue)
-                        Text("今日学习")
-                        Spacer()
-                        Text("\(todayCount) 词")
-                            .foregroundColor(.secondary)
+                    NavigationLink(destination: WordListView(
+                        title: "今日学习",
+                        wordIds: db.getTodayStudiedWordIds(),
+                        emptyText: "今天还没有学习任何单词"
+                    )) {
+                        HStack {
+                            Image(systemName: "book.fill")
+                                .foregroundColor(.blue)
+                            Text("今日学习")
+                            Spacer()
+                            Text("\(todayCount) 词")
+                                .foregroundColor(.secondary)
+                            Image(systemName: "chevron.right")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
                     }
                     
                     HStack {
@@ -32,22 +41,40 @@ struct StatsScreen: View {
                 }
                 
                 Section("总体进度") {
-                    HStack {
-                        Image(systemName: "chart.bar.fill")
-                            .foregroundColor(.green)
-                        Text("已学单词")
-                        Spacer()
-                        Text("\(totalWords) 词")
-                            .foregroundColor(.secondary)
+                    NavigationLink(destination: WordListView(
+                        title: "已学单词",
+                        wordIds: db.getAllStudiedWordIds(),
+                        emptyText: "还没有学习任何单词"
+                    )) {
+                        HStack {
+                            Image(systemName: "chart.bar.fill")
+                                .foregroundColor(.green)
+                            Text("已学单词")
+                            Spacer()
+                            Text("\(totalWords) 词")
+                                .foregroundColor(.secondary)
+                            Image(systemName: "chevron.right")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
                     }
                     
-                    HStack {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundColor(.purple)
-                        Text("已掌握")
-                        Spacer()
-                        Text("\(masteredWords) 词")
-                            .foregroundColor(.secondary)
+                    NavigationLink(destination: WordListView(
+                        title: "已掌握",
+                        wordIds: db.getMasteredWordIds(),
+                        emptyText: "还没有掌握任何单词"
+                    )) {
+                        HStack {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundColor(.purple)
+                            Text("已掌握")
+                            Spacer()
+                            Text("\(masteredWords) 词")
+                                .foregroundColor(.secondary)
+                            Image(systemName: "chevron.right")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
             }
@@ -64,5 +91,64 @@ struct StatsScreen: View {
         streakDays = stats.streakDays
         totalWords = db.getTotalWordCount()
         masteredWords = db.getMasteredWordCount()
+    }
+}
+
+// MARK: - Word List Detail View
+
+struct WordListView: View {
+    let title: String
+    let wordIds: [Int64]
+    let emptyText: String
+    
+    /// Resolve word IDs to Word objects using cached loader
+    private var words: [Word] {
+        let allWords = WordbookLoader.shared.loadFromProjectBundle()
+        let idSet = Set(wordIds)
+        return allWords.filter { idSet.contains($0.id) }
+    }
+    
+    var body: some View {
+        List {
+            if words.isEmpty {
+                VStack(spacing: 12) {
+                    Image(systemName: "tray")
+                        .font(.system(size: 40))
+                        .foregroundColor(.secondary)
+                    Text(emptyText)
+                        .foregroundColor(.secondary)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 40)
+            } else {
+                HStack {
+                    Text("共 \(words.count) 词")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    Spacer()
+                }
+                .padding(.vertical, 4)
+                
+                ForEach(words) { word in
+                    VStack(alignment: .leading, spacing: 4) {
+                        HStack {
+                            Text(word.word)
+                                .font(.headline)
+                            if !word.phonetic.isEmpty {
+                                Text(word.phonetic)
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                        Text(word.meaning)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                            .lineLimit(2)
+                    }
+                    .padding(.vertical, 2)
+                }
+            }
+        }
+        .navigationTitle(title)
     }
 }

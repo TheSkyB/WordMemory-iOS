@@ -409,7 +409,7 @@ struct SwipeBackgroundView: View {
             }
         }
         .padding(.horizontal, 30)
-        .opacity(min(abs(offset.width) / 100, 1.0))
+        .opacity(Swift.min(Swift.abs(offset.width) / 100.0, 1.0))
     }
 }
 
@@ -590,6 +590,7 @@ struct SettingsView: View {
     @ObservedObject var pronunciation: PronunciationService
     @Environment(\.dismiss) var dismiss
     @State private var apiKey: String = ""
+    @State private var showSaved = false
     @State private var notificationsEnabled = false
     @State private var reminderTime = Date()
     
@@ -606,7 +607,7 @@ struct SettingsView: View {
                 
                 Section("发音设置") {
                     Picker("发音来源", selection: $pronunciation.currentSource) {
-                        ForEach(PronunciationSource.allCases, id: \.self) { source in
+                        ForEach(PronunciationService.PronunciationSource.allCases, id: \.self) { source in
                             HStack {
                                 Image(systemName: source.icon)
                                 Text(source.rawValue)
@@ -645,7 +646,18 @@ struct SettingsView: View {
                     SecureField("DeepSeek API Key", text: $apiKey)
                         .textInputAutocapitalization(.never)
                     Button("保存 API Key") {
-                        AIService.shared.setAPIKey(apiKey)
+                        AIService.setAPIKey(apiKey)
+                        showSaved = true
+                    }
+                    if showSaved {
+                        HStack {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundColor(.green)
+                            Text("已保存")
+                                .foregroundColor(.green)
+                            Spacer()
+                        }
+                        .font(.subheadline)
                     }
                 }
                 
@@ -680,6 +692,7 @@ struct SettingsView: View {
             }
             .onAppear {
                 apiKey = UserDefaults.standard.string(forKey: "ai_api_key") ?? ""
+                showSaved = false
                 NotificationManager.shared.checkNotificationStatus { enabled in
                     notificationsEnabled = enabled
                 }

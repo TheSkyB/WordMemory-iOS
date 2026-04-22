@@ -238,9 +238,9 @@ class SM2Scheduler {
         return p.intervalDays <= 0 || p.repetitions <= 0
     }
     
-    private func updateEase(_ current: Float, _ quality: Int, _ min: Float) -> Float {
+    private func updateEase(_ current: Float, _ quality: Int, _ minEase: Float) -> Float {
         let updated = current - 0.8 + 0.28 * Float(quality) - 0.02 * Float(quality * quality)
-        return min(max(updated, min), maxEase)
+        return Swift.min(Swift.max(updated, minEase), maxEase)
     }
     
     private func conservativeInterval(_ old: Int, _ ease: Float) -> Int {

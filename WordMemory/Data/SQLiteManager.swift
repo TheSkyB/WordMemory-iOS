@@ -297,4 +297,83 @@ class SQLiteManager {
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter.string(from: date)
     }
+    
+    // MARK: - Word Count
+    
+    func getTotalWordCount() -> Int {
+        let sql = "SELECT COUNT(*) FROM progress;"
+        var stmt: OpaquePointer?
+        guard sqlite3_prepare_v2(db, sql, -1, &stmt, nil) == SQLITE_OK else { return 0 }
+        guard sqlite3_step(stmt) == SQLITE_ROW else {
+            sqlite3_finalize(stmt)
+            return 0
+        }
+        let count = Int(sqlite3_column_int(stmt, 0))
+        sqlite3_finalize(stmt)
+        return count
+    }
+    
+    func getMasteredWordCount() -> Int {
+        let sql = "SELECT COUNT(*) FROM progress WHERE status = ?;"
+        var stmt: OpaquePointer?
+        guard sqlite3_prepare_v2(db, sql, -1, &stmt, nil) == SQLITE_OK else { return 0 }
+        sqlite3_bind_int(stmt, 1, Int32(Progress.Status.mastered))
+        guard sqlite3_step(stmt) == SQLITE_ROW else {
+            sqlite3_finalize(stmt)
+            return 0
+        }
+        let count = Int(sqlite3_column_int(stmt, 0))
+        sqlite3_finalize(stmt)
+        return count
+    }
+    
+    // MARK: - Today's Studied Words
+    
+    /// Get word IDs studied today from study_records
+    func getTodayStudiedWordIds() -> [Int64] {
+        let startOfDay = Calendar.current.startOfDay(for: Date()).timeIntervalSince1970
+        let sql = "SELECT DISTINCT word_id FROM study_records WHERE timestamp >= ?;"
+        var stmt: OpaquePointer?
+        var ids: [Int64] = []
+        
+        guard sqlite3_prepare_v2(db, sql, -1, &stmt, nil) == SQLITE_OK else { return ids }
+        sqlite3_bind_double(stmt, 1, startOfDay)
+        
+        while sqlite3_step(stmt) == SQLITE_ROW {
+            ids.append(sqlite3_column_int64(stmt, 0))
+        }
+        sqlite3_finalize(stmt)
+        return ids
+    }
+    
+    /// Get all word IDs that have been studied (appear in progress table)
+    func getAllStudiedWordIds() -> [Int64] {
+        let sql = "SELECT word_id FROM progress WHERE is_new_word = 0;"
+        var stmt: OpaquePointer?
+        var ids: [Int64] = []
+        
+        guard sqlite3_prepare_v2(db, sql, -1, &stmt, nil) == SQLITE_OK else { return ids }
+        
+        while sqlite3_step(stmt) == SQLITE_ROW {
+            ids.append(sqlite3_column_int64(stmt, 0))
+        }
+        sqlite3_finalize(stmt)
+        return ids
+    }
+    
+    /// Get mastered word IDs (status = mastered)
+    func getMasteredWordIds() -> [Int64] {
+        let sql = "SELECT word_id FROM progress WHERE status = ?;"
+        var stmt: OpaquePointer?
+        var ids: [Int64] = []
+        
+        guard sqlite3_prepare_v2(db, sql, -1, &stmt, nil) == SQLITE_OK else { return ids }
+        sqlite3_bind_int(stmt, 1, Int32(Progress.Status.mastered))
+        
+        while sqlite3_step(stmt) == SQLITE_ROW {
+            ids.append(sqlite3_column_int64(stmt, 0))
+        }
+        sqlite3_finalize(stmt)
+        return ids
+    }
 }

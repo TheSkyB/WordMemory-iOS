@@ -1,0 +1,30 @@
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+*.xcuserdatad
+xcuserdata/
+
+# macOS
+.DS_Store
+*.swp
+*~
+
+# Build artifacts
+*.ipa
+*.dSYM.zip
+*.dSYM
+*.app
+
+# CocoaPods (if used)
+Pods/
+
+# Swift Package Manager
+.build/
+Packages/
+Package.resolved
+
+# Misc
+*.moved-aside
+*.hmap
+*.xccheckout

@@ -4,6 +4,56 @@ class WordbookLoader {
     
     static let shared = WordbookLoader()
     
+    /// Cache: avoid re-parsing 26K+ word JSON on every screen appear
+    private var cachedWords: [Word]?
+    
+    func loadFromProjectBundle() -> [Word] {
+        if let cached = cachedWords { return cached }
+        let words = _loadFromBundle()
+        cachedWords = words
+        return words
+    }
+    
+    /// Force reload (e.g. after importing new wordbook)
+    func invalidateCache() {
+        cachedWords = nil
+    }
+    
+    private func _loadFromBundle() -> [Word] {
+        let fileManager = FileManager.default
+        
+        // Try document directory first (user-imported wordbook)
+        let docPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("wordbook_full.json")
+        if fileManager.fileExists(atPath: docPath.path) {
+            let words = loadFromJSON(url: docPath)
+            if !words.isEmpty { return words }
+        }
+        
+        // Load both bundled wordbooks and merge (deduplicate by word)
+        var allWords: [Word] = []
+        var seenWords: Set<String> = []
+        
+        let bundleFiles = ["wordbook_full", "wordbook_full_from_e2c"]
+        
+        for filename in bundleFiles {
+            if let url = Bundle.main.url(forResource: filename, withExtension: "json"),
+               fileManager.fileExists(atPath: url.path) {
+                let words = loadFromJSON(url: url)
+                for word in words {
+                    let key = word.word.lowercased()
+                    if seenWords.insert(key).inserted {
+                        allWords.append(word)
+                    }
+                }
+            }
+        }
+        
+        if !allWords.isEmpty { return allWords }
+        
+        // Fallback: load small sample
+        return sampleWords()
+    }
+    
     func loadFromJSON(url: URL) -> [Word] {
         guard let data = try? Data(contentsOf: url) else {
             print("Failed to load JSON from \(url)")
@@ -27,6 +77,13 @@ class WordbookLoader {
             }
         }
         
+        // Try Youdao-style format: { "code": 200, "data": [...] }
+        if let dict = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+           let dataArray = dict["data"] as? [[String: Any]] {
+            let words = parseYoudaoArray(dataArray)
+            if !words.isEmpty { return words }
+        }
+        
         // Try object format with data key
         if let dict = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
            let dataArray = dict["data"] as? [[String: Any]] {
@@ -39,6 +96,92 @@ class WordbookLoader {
         }
         
         return []
+    }
+    
+    /// Parse Youdao-style wordbook format
+    private func parseYoudaoArray(_ array: [[String: Any]]) -> [Word] {
+        return array.enumerated().compactMap { index, dict in
+            guard let word = dict["word"] as? String else { return nil }
+            
+            // Extract meaning from translations
+            var meaning = ""
+            if let translations = dict["translations"] as? [[String: Any]] {
+                meaning = translations.compactMap { t in
+                    guard let pos = t["pos"] as? String, let tran = t["tran_cn"] as? String else { return nil }
+                    return "\(pos) \(tran)"
+                }.joined(separator: "; ")
+            }
+            if meaning.isEmpty {
+                meaning = dict["meaning"] as? String ?? ""
+            }
+            
+            // Extract phonetic
+            let usphone = dict["usphone"] as? String ?? ""
+            let phonetic = usphone.isEmpty ? (dict["ukphone"] as? String ?? "") : usphone
+            
+            // Extract example from sentences
+            var example = ""
+            if let sentences = dict["sentences"] as? [[String: Any]], let first = sentences.first {
+                let en = first["s_content"] as? String ?? ""
+                let cn = first["s_cn"] as? String ?? ""
+                example = en.isEmpty ? "" : "\(en) \(cn)"
+            }
+            if example.isEmpty {
+                example = dict["example"] as? String ?? ""
+            }
+            
+            // Extract phrases
+            var phrasesStr = ""
+            if let phrases = dict["phrases"] as? [[String: Any]] {
+                phrasesStr = phrases.compactMap { p in
+                    guard let phrase = p["p"] as? String ?? p["phrase"] as? String,
+                          let meaning = p["m"] as? String ?? p["meaning"] as? String else { return nil }
+                    return "\(phrase) \(meaning)"
+                }.joined(separator: "; ")
+            }
+            if phrasesStr.isEmpty {
+                phrasesStr = dict["phrases"] as? String ?? ""
+            }
+            
+            // Extract synonyms
+            var synonymsStr = ""
+            if let synonyms = dict["synonyms"] as? [[String: Any]] {
+                synonymsStr = synonyms.compactMap { s in
+                    (s["word"] as? String)
+                }.joined(separator: ", ")
+            }
+            if synonymsStr.isEmpty {
+                synonymsStr = dict["synonyms"] as? String ?? ""
+            }
+            
+            // Extract relWords
+            var relWordsStr = ""
+            if let relWords = dict["relWords"] as? [[String: Any]] {
+                relWordsStr = relWords.compactMap { r in
+                    guard let w = r["word"] as? String else { return nil }
+                    let meaning = r["tran"] as? String ?? ""
+                    return meaning.isEmpty ? w : "\(w) \(meaning)"
+                }.joined(separator: "; ")
+            }
+            if relWordsStr.isEmpty {
+                relWordsStr = dict["relWords"] as? String ?? ""
+            }
+            
+            let bookIdStr = dict["bookId"] as? String ?? "1"
+            let bookId = Int64(bookIdStr) ?? 1
+            
+            return Word(
+                id: Int64(index + 1),
+                word: word,
+                phonetic: phonetic.isEmpty ? "" : "/\(phonetic)/",
+                meaning: meaning,
+                example: example,
+                phrases: phrasesStr,
+                synonyms: synonymsStr,
+                relWords: relWordsStr,
+                bookId: bookId
+            )
+        }
     }
     
     private func parseDictionaryArray(_ array: [[String: Any]]) -> [Word] {
@@ -60,23 +203,7 @@ class WordbookLoader {
         }
     }
     
-    func loadFromProjectBundle() -> [Word] {
-        let fileManager = FileManager.default
-        let possiblePaths = [
-            fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("wordbook_full.json"),
-            Bundle.main.url(forResource: "wordbook_full", withExtension: "json"),
-        ].compactMap { $0 }
-        
-        for path in possiblePaths {
-            if fileManager.fileExists(atPath: path.path) {
-                let words = loadFromJSON(url: path)
-                if !words.isEmpty { return words }
-            }
-        }
-        
-        // Fallback: load small sample
-        return sampleWords()
-    }
+    // loadFromProjectBundle is now the cached version above
     
     private func sampleWords() -> [Word] {
         return [

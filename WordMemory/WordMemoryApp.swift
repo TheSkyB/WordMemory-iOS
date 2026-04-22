@@ -35,7 +35,7 @@ struct ContentView: View {
                 }
                 .tag(2)
             
-            Text("我的")
+            ProfileScreen()
                 .tabItem {
                     Image(systemName: "person.fill")
                     Text("我的")

@@ -18,7 +18,7 @@ struct NotebookScreen: View {
                                     .font(.headline)
                                 Spacer()
                                 Button(action: {
-                                    notebook.removeFromNotebook(wordId: word.id)
+                                    notebook.remove(wordId: word.id)
                                     loadNotebook()
                                 }) {
                                     Image(systemName: "star.fill")
@@ -41,6 +41,18 @@ struct NotebookScreen: View {
     }
     
     private func loadNotebook() {
-        notebookWords = notebook.getNotebookWords()
+        let allWords = WordbookLoader.shared.loadFromProjectBundle()
+        notebookWords = notebook.getNewWords(from: allWords)
+    }
+    
+    /// Background load to avoid UI freeze
+    private func loadNotebookAsync() {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let allWords = WordbookLoader.shared.loadFromProjectBundle()
+            let filtered = notebook.getNewWords(from: allWords)
+            DispatchQueue.main.async {
+                self.notebookWords = filtered
+            }
+        }
     }
 }

@@ -297,8 +297,18 @@ enum AlgorithmVersion {
 }
 
 enum SpellingOutcome {
-    case perfect      // 完全正确
-    case correct      // 正确（有小错误）
-    case close        // 接近（1-2个字母错误）
-    case wrong        // 错误
+    case perfect       // 完全正确
+    case retrySuccess  // 接近正确
+    case hinted        // 需要练习
+    case failed        // 再试一次
+    
+    /// SM2 quality value (0-5 scale)
+    var quality: Int {
+        switch self {
+        case .perfect: return 5
+        case .retrySuccess: return 4
+        case .hinted: return 3
+        case .failed: return 1
+        }
+    }
 }
