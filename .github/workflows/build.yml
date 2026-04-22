@@ -1,0 +1,61 @@
+name: Build IPA
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    
+    - name: Setup Xcode
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+    
+    - name: Install xcodegen
+      run: brew install xcodegen
+    
+    - name: Generate Xcode Project
+      run: xcodegen generate
+    
+    - name: Build Archive
+      run: |
+        xcodebuild \
+          -project WordMemory.xcodeproj \
+          -scheme WordMemory \
+          -configuration Release \
+          -sdk iphoneos \
+          -archivePath build/WordMemory.xcarchive \
+          archive \
+          CODE_SIGN_IDENTITY="" \
+          CODE_SIGNING_REQUIRED=NO \
+          CODE_SIGNING_ALLOWED=NO
+    
+    - name: Create IPA (unsigned)
+      run: |
+        mkdir -p build/Payload
+        cp -r build/WordMemory.xcarchive/Products/Applications/WordMemory.app build/Payload/
+        cd build
+        zip -r WordMemory-unsigned.ipa Payload
+    
+    - name: Upload IPA
+      uses: actions/upload-artifact@v4
+      with:
+        name: WordMemory-unsigned
+        path: build/WordMemory-unsigned.ipa
+    
+    - name: Upload to Release
+      if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v1
+      with:
+        files: build/WordMemory-unsigned.ipa
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
